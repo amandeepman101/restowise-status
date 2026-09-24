@@ -1,0 +1,122 @@
+{
+ "checked_at": "2026-09-24T20:55:47.801Z",
+ "overall": "ok",
+ "services": [
+  {
+   "name": "Hub",
+   "section": "Apps",
+   "state": "ok",
+   "ms": 394
+  },
+  {
+   "name": "Scheduler",
+   "section": "Apps",
+   "state": "ok",
+   "ms": 299
+  },
+  {
+   "name": "Payroll",
+   "section": "Apps",
+   "state": "ok",
+   "ms": 337
+  },
+  {
+   "name": "Breaks",
+   "section": "Apps",
+   "state": "ok",
+   "ms": 368
+  },
+  {
+   "name": "Checklist",
+   "section": "Apps",
+   "state": "ok",
+   "ms": 382
+  },
+  {
+   "name": "Dough Prep",
+   "section": "Apps",
+   "state": "ok",
+   "ms": 436
+  },
+  {
+   "name": "HACCP",
+   "section": "Apps",
+   "state": "ok",
+   "ms": 392
+  },
+  {
+   "name": "Inventory",
+   "section": "Apps",
+   "state": "ok",
+   "ms": 511
+  },
+  {
+   "name": "Insights",
+   "section": "Apps",
+   "state": "ok",
+   "ms": 511
+  },
+  {
+   "name": "Marketing",
+   "section": "Apps",
+   "state": "ok",
+   "ms": 358
+  },
+  {
+   "name": "Hiring",
+   "section": "Apps",
+   "state": "ok",
+   "ms": 429
+  },
+  {
+   "name": "Admin",
+   "section": "Apps",
+   "state": "ok",
+   "ms": 502
+  },
+  {
+   "name": "Help center",
+   "section": "Apps",
+   "state": "ok",
+   "ms": 391
+  },
+  {
+   "name": "Website",
+   "section": "Apps",
+   "state": "ok",
+   "ms": 520
+  },
+  {
+   "name": "Sign-in",
+   "section": "Behind the scenes",
+   "state": "ok",
+   "ms": 720
+  },
+  {
+   "name": "Mobile app sync",
+   "section": "Behind the scenes",
+   "state": "ok",
+   "ms": 2458
+  },
+  {
+   "name": "Review, job & deals forms",
+   "section": "Behind the scenes",
+   "state": "ok",
+   "ms": 963
+  },
+  {
+   "name": "Notifications",
+   "section": "Behind the scenes",
+   "state": "ok",
+   "ms": 716
+  },
+  {
+   "name": "Email",
+   "section": "Behind the scenes",
+   "state": "ok",
+   "ms": 461
+  }
+ ],
+ "incidents": [],
+ "last_outage": null
+}
