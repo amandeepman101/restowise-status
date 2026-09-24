@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Restowise Status</title>
+<meta name="description" content="Live status of the Restowise apps.">
+<link rel="icon" href="https://restowise.app/favicon.svg">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#07061a;--panel:rgba(255,255,255,.035);--line:rgba(255,255,255,.08);--txt:#e9e7fb;--dim:#8b87b3;--ok:#34d399;--warn:#fbbf24;--bad:#f87171;--acc:#fb923c;--none:rgba(255,255,255,.08)}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(1200px 600px at 70% -10%,#1d1a52 0,transparent 60%),radial-gradient(900px 500px at 0% 30%,#2a1240 0,transparent 55%),var(--bg);color:var(--txt);font-family:Manrope,system-ui,sans-serif;min-height:100vh}
+.wrap{max-width:1100px;margin:0 auto;padding:28px 16px 60px}
+header{display:flex;align-items:center;gap:12px}
+.logo{width:30px;height:30px}
+h1{font-size:18px;margin:0;font-weight:800}h1 span{color:var(--dim);font-weight:600}
+.sp{flex:1}
+.btn{background:rgba(255,255,255,.06);border:1px solid var(--line);color:var(--txt);border-radius:10px;padding:8px 14px;font:700 13px Manrope;cursor:pointer}
+.btn:hover{border-color:rgba(251,146,60,.6)}
+.hero{margin-top:26px;border:1px solid var(--line);border-radius:20px;padding:26px;display:flex;align-items:center;gap:20px;position:relative;overflow:hidden;background:linear-gradient(135deg,rgba(255,255,255,.05),rgba(255,255,255,.02))}
+.hero.ok{background:linear-gradient(135deg,rgba(52,211,153,.10),rgba(255,255,255,.02))}
+.hero.slow{background:linear-gradient(135deg,rgba(251,191,36,.13),rgba(255,255,255,.02))}
+.hero.down{background:linear-gradient(135deg,rgba(248,113,113,.15),rgba(255,255,255,.02))}
+.orb{width:54px;height:54px;border-radius:50%;background:var(--dim);flex:none;--c:139,135,179;animation:ping 2.2s infinite}
+.ok .orb{background:var(--ok);--c:52,211,153}.slow .orb{background:var(--warn);--c:251,191,36}.down .orb{background:var(--bad);--c:248,113,113}
+@keyframes ping{0%{box-shadow:0 0 0 0 rgba(var(--c),.55)}80%,100%{box-shadow:0 0 0 22px rgba(var(--c),0)}}
+.hero h2{margin:0;font-size:26px;letter-spacing:-.02em}
+.hero p{margin:4px 0 0;color:var(--dim);font-size:14px}
+.mono{font-family:"JetBrains Mono",monospace}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:14px}
+.kpi{border:1px solid var(--line);background:var(--panel);border-radius:14px;padding:14px}
+.kpi b{display:block;font-size:22px}.kpi small{color:var(--dim);font-size:12px;font-weight:700}
+h3{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin:30px 0 10px}
+.map{border:1px solid var(--line);background:var(--panel);border-radius:20px;height:360px;position:relative;overflow:hidden}
+.map svg{width:100%;height:100%}
+.node rect{fill:#141233;stroke:rgba(255,255,255,.14)}
+.node text{fill:var(--txt);font:700 12px Manrope}
+.edge{stroke:rgba(255,255,255,.09);stroke-width:1.5;fill:none}
+.pulse{filter:drop-shadow(0 0 4px currentColor)}
+.legend{position:absolute;left:14px;bottom:12px;font-size:11px;color:var(--dim);display:flex;gap:14px;flex-wrap:wrap}
+.legend i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px}
+.grp{border:1px solid var(--line);background:var(--panel);border-radius:16px;margin-bottom:12px;overflow:hidden}
+.gh{padding:10px 16px 0;font-size:11px;font-weight:800;letter-spacing:.1em;color:var(--dim);text-transform:uppercase}
+.row{display:grid;grid-template-columns:210px 1fr 76px 74px;gap:14px;align-items:center;padding:12px 16px;border-top:1px solid var(--line);cursor:pointer}
+.gh+.row{border-top:none}
+.row:hover{background:rgba(255,255,255,.025)}
+.nm{font-weight:700;font-size:14px;display:flex;align-items:center;gap:8px}
+.st{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 8px var(--ok);flex:none}
+.st.slow{background:var(--warn);box-shadow:0 0 8px var(--warn)}.st.down{background:var(--bad);box-shadow:0 0 8px var(--bad)}
+.bars{display:flex;gap:2px;height:26px;align-items:stretch}
+.bars i{flex:1;border-radius:2px;background:var(--ok);opacity:.8}
+.bars i.slow{background:var(--warn)}.bars i.down{background:var(--bad)}.bars i.none{background:var(--none)}
+.bars i:hover{opacity:1;transform:scaleY(1.15)}
+.up{font-size:13px;font-weight:700;text-align:right}
+.ms{font-size:12px;color:var(--dim);text-align:right}
+.detail{display:none;padding:4px 16px 16px;border-top:1px dashed var(--line)}
+.detail.open{display:block}
+.spark{width:100%;height:70px;display:block}
+.cap{font-size:12px;color:var(--dim)}
+.inc{border:1px solid var(--line);background:var(--panel);border-radius:16px;padding:16px 18px;margin-bottom:10px}
+.inc b{font-size:15px}.tag{font-size:11px;font-weight:800;padding:3px 8px;border-radius:99px;margin-left:8px;text-transform:capitalize}
+.tag.open{background:rgba(251,191,36,.15);color:var(--warn)}.tag.resolved{background:rgba(52,211,153,.13);color:var(--ok)}
+.tl{margin:10px 0 0;padding-left:16px;border-left:2px solid var(--line);font-size:13px;color:var(--dim)}
+.tl div{margin:6px 0}.tl em{font-style:normal;color:var(--txt);font-weight:700}
+.none{color:var(--dim);font-size:14px}
+#tip{position:fixed;pointer-events:none;background:#1a1740;border:1px solid var(--line);border-radius:8px;padding:6px 9px;font-size:12px;display:none;z-index:9}
+.scan{position:absolute;top:0;bottom:0;left:-30%;width:30%;background:linear-gradient(90deg,transparent,rgba(251,146,60,.14),transparent);display:none}
+.scan.go{display:block;animation:scan 1s linear}
+@keyframes scan{from{left:-30%}to{left:100%}}
+footer{margin-top:36px;color:var(--dim);font-size:12px;text-align:center}
+.err{margin-top:14px;color:var(--bad);font-size:14px}
+@media(max-width:760px){.kpis{grid-template-columns:repeat(2,1fr)}.row{grid-template-columns:1fr 64px}.row .bars,.row .ms{display:none}.map{height:300px}.hero h2{font-size:21px}}
+</style></head><body>
+<div class="wrap">
+<header>
+  <svg class="logo" viewBox="0 0 100 100" aria-hidden="true"><defs><linearGradient id="og" x1="20" y1="44" x2="80" y2="57" gradientUnits="userSpaceOnUse"><stop stop-color="#fb923c"/><stop offset=".35" stop-color="#fbbf24"/><stop offset=".7" stop-color="#ea580c"/><stop offset="1" stop-color="#fb7185"/></linearGradient></defs><path d="M50 20L77 35.5L50 51L23 35.5z" fill="url(#og)"/><path d="M50 20L77 35.5L50 51L23 35.5z" fill="#fff" fill-opacity=".28"/><path d="M23 35.5L50 51V82L23 66.5z" fill="url(#og)"/><path d="M77 35.5L50 51V82L77 66.5z" fill="url(#og)"/><path d="M77 35.5L50 51V82L77 66.5z" fill="#000" fill-opacity=".22"/></svg>
+  <h1>Restowise <span>Status</span></h1><span class="sp"></span>
+  <button class="btn" id="refresh">⟳ Refresh</button>
+</header>
+
+<div class="hero" id="hero"><div class="scan" id="scan"></div><div class="orb"></div>
+  <div><h2 id="headline">Checking…</h2><p id="sub">Loading the latest results.</p></div></div>
+<div class="kpis">
+  <div class="kpi"><b id="k-up">—</b><small>Uptime · 90 days</small></div>
+  <div class="kpi"><b class="mono" id="k-ms">—</b><small>Median response · now</small></div>
+  <div class="kpi"><b id="k-ok">—</b><small>Services working</small></div>
+  <div class="kpi"><b id="k-since">—</b><small>Since last outage</small></div>
+</div>
+
+<h3>How it fits together · live</h3>
+<div class="map"><svg id="map" viewBox="0 0 1060 360" role="img" aria-label="Map of Restowise services"></svg>
+  <div class="legend"><span><i style="background:var(--ok)"></i>working</span><span><i style="background:var(--warn)"></i>slow</span><span><i style="background:var(--bad)"></i>down</span><span>· moving dots = traffic</span></div></div>
+
+<h3>Services · last 90 days</h3>
+<div id="groups"></div>
+
+<h3>Incidents</h3>
+<div id="incidents"><p class="none">No incidents in the last 14 days.</p></div>
+
+<footer>Checked every 5 minutes from outside Restowise, so this page stays up even when the apps don't.</footer>
+</div>
+<div id="tip"></div>
+<script>
+const DATA = new URLSearchParams(location.search).get('data') || 'https://raw.githubusercontent.com/amandeepman101/restowise-status/data/';
+const $ = id => document.getElementById(id);
+const COLOR = { ok: '#34d399', slow: '#fbbf24', down: '#f87171', none: '#8b87b3' };
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const ago = iso => { const s = Math.max(0, (Date.now() - new Date(iso)) / 1000); return s < 90 ? `${Math.round(s)}s` : s < 5400 ? `${Math.round(s / 60)} min` : `${Math.round(s / 3600)} h`; };
+const fmtT = iso => new Date(iso).toLocaleString([], { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
+const dayKey = d => d.toLocaleDateString('en-CA', { timeZone: 'America/Los_Angeles' });
+let cur = null, hist = null, checkedAt = null;
+
+async function load() {
+  const bust = `?t=${Math.floor(Date.now() / 60000)}`;
+  try {
+    const [c, h] = await Promise.all([fetch(DATA + 'current.json' + bust).then(r => r.json()), fetch(DATA + 'history.json' + bust).then(r => r.json())]);
+    cur = c; hist = h; checkedAt = c.checked_at; render();
+  } catch (e) {
+    $('headline').textContent = 'Status unavailable';
+    $('sub').textContent = 'Could not load the latest results. Try again in a minute.';
+  }
+}
+
+function render() {
+  const svc = cur.services, bad = svc.filter(s => s.state !== 'ok');
+  const stale = Date.now() - new Date(cur.checked_at) > 20 * 60000;
+  const overall = stale ? 'none' : cur.overall;
+  $('hero').className = 'hero ' + (stale ? '' : overall);
+  $('headline').textContent = stale ? 'Checks are running late'
+    : overall === 'ok' ? 'All systems working'
+    : bad.length === 1 ? `${bad[0].name} ${bad[0].state === 'down' ? 'is down' : 'is slow'}`
+    : `${bad.length} services ${overall === 'down' ? 'having problems' : 'running slow'}`;
+  tick();
+  // KPIs
+  let runs = 0, fails = 0;
+  for (const d of Object.values(hist.days)) for (const t of Object.values(d)) { runs += t.runs; fails += t.fails; }
+  $('k-up').textContent = runs ? ((1 - fails / runs) * 100).toFixed(2) + '%' : '—';
+  const mss = svc.map(s => s.ms).sort((a, b) => a - b);
+  $('k-ms').textContent = mss.length ? mss[Math.floor(mss.length / 2)] + ' ms' : '—';
+  $('k-ok').textContent = `${svc.length - bad.length} / ${svc.length}`;
+  $('k-since').textContent = cur.last_outage ? ((d => d < 1 ? 'today' : `${Math.floor(d)} day${Math.floor(d) === 1 ? '' : 's'}`)((Date.now() - new Date(cur.last_outage)) / 864e5)) : 'none recorded';
+  renderGroups(); drawMap(); renderIncidents();
+}
+function tick() {
+  if (!cur) return;
+  const bad = cur.services.filter(s => s.state !== 'ok').length;
+  $('sub').textContent = `${bad ? 'Everything else is working · ' : ''}last checked ${ago(checkedAt)} ago`;
+}
+
+function renderGroups() {
+  const sections = [...new Set(cur.services.map(s => s.section))];
+  const today = new Date();
+  $('groups').innerHTML = sections.map(sec => `<div class="grp"><div class="gh">${esc(sec)}</div>${cur.services.filter(s => s.section === sec).map(s => {
+    const days = hist.days[s.name] || {};
+    let bars = '', runs = 0, fails = 0;
+    for (let i = 89; i >= 0; i--) {
+      const d = new Date(today); d.setDate(d.getDate() - i); const k = dayKey(d), t = days[k];
+      if (t) { runs += t.runs; fails += t.fails; }
+      const c = !t ? 'none' : t.fails ? 'down' : t.slows ? 'slow' : 'ok';
+      bars += `<i class="${c}" data-k="${k}" data-s="${esc(s.name)}"></i>`;
+    }
+    return `<div class="row" data-s="${esc(s.name)}"><div class="nm"><span class="st ${s.state}"></span>${esc(s.name)}</div><div class="bars">${bars}</div><div class="up">${runs ? ((1 - fails / runs) * 100).toFixed(2) + '%' : '—'}</div><div class="ms mono">${s.ms} ms</div></div><div class="detail"><svg class="spark" viewBox="0 0 600 70" preserveAspectRatio="none"></svg><div class="cap">Response time · last 24 hours · every 5 minutes</div></div>`;
+  }).join('')}</div>`).join('');
+  document.querySelectorAll('.bars i').forEach(b => {
+    b.onmousemove = e => {
+      const t = (hist.days[b.dataset.s] || {})[b.dataset.k];
+      const label = new Date(b.dataset.k + 'T12:00').toLocaleDateString([], { month: 'short', day: 'numeric' });
+      const mins = n => `${n * 5} min`;
+      tip.innerHTML = `<b>${label}</b> · ${!t ? 'no data' : t.fails ? `<span style="color:var(--bad)">down ~${mins(t.fails)}</span>` : t.slows ? `<span style="color:var(--warn)">slow ~${mins(t.slows)}</span>` : 'no issues'}${t ? `<br><span class="mono">avg ${Math.round(t.ms / t.runs)} ms</span>` : ''}`;
+      tip.style.display = 'block'; tip.style.left = Math.min(e.clientX + 12, innerWidth - 180) + 'px'; tip.style.top = e.clientY + 12 + 'px';
+    };
+    b.onmouseleave = () => tip.style.display = 'none';
+  });
+  document.querySelectorAll('.row').forEach(r => r.onclick = () => {
+    const d = r.nextElementSibling; d.classList.toggle('open');
+    const pts = hist.recent[r.dataset.s] || [];
+    if (!pts.length) return;
+    const max = Math.max(...pts.map(p => p[1]), 100), n = pts.length;
+    const path = pts.map((p, i) => `${i ? 'L' : 'M'}${(i / Math.max(1, n - 1) * 600).toFixed(1)} ${(66 - p[1] / max * 58).toFixed(1)}`).join(' ');
+    const marks = pts.map((p, i) => p[2] !== 'ok' ? `<rect x="${(i / Math.max(1, n - 1) * 600 - 1).toFixed(1)}" y="0" width="3" height="70" fill="${COLOR[p[2]]}" opacity=".45"/>` : '').join('');
+    d.querySelector('svg').innerHTML = `${marks}<path d="${path} L600 70 L0 70z" fill="rgba(251,146,60,.12)"/><path d="${path}" stroke="#fb923c" stroke-width="1.5" fill="none" vector-effect="non-scaling-stroke"/>`;
+  });
+}
+
+// The map: fixed layout, each node coloured by the worst of the services it stands for.
+function drawMap() {
+  const st = n => (cur.services.find(s => s.name === n) || {}).state || 'ok';
+  const worst = (...ns) => ns.map(st).includes('down') ? 'down' : ns.map(st).includes('slow') ? 'slow' : 'ok';
+  const appNames = cur.services.filter(s => s.section === 'Apps').map(s => s.name);
+  const shown = ['Hub', 'Scheduler', 'Payroll', 'Marketing'];
+  const rest = appNames.filter(n => !shown.includes(n));
+  const N = {
+    you: [90, 180, 'You', 'ok'],
+    a0: [340, 50, 'Hub', st('Hub')], a1: [340, 115, 'Scheduler', st('Scheduler')], a2: [340, 180, 'Payroll', st('Payroll')],
+    a3: [340, 245, 'Marketing', st('Marketing')], a4: [340, 310, `+ ${rest.length} more apps`, worst(...rest)],
+    sign: [640, 70, 'Sign-in', st('Sign-in')], data: [640, 175, 'Your data', st('Mobile app sync')], forms: [640, 285, 'Public forms', st('Review, job & deals forms')],
+    notif: [920, 130, 'Notifications', st('Notifications')], mail: [920, 240, 'Email', st('Email')],
+  };
+  const E = [['you','a0'],['you','a1'],['you','a2'],['you','a3'],['you','a4'],['a0','sign'],['a1','data'],['a2','data'],['a3','data'],['a4','data'],['a3','forms'],['sign','data'],['data','notif'],['data','mail'],['forms','mail']];
+  let h = '';
+  E.forEach(([a, b], i) => { const [x1, y1] = N[a], [x2, y2] = N[b]; h += `<path class="edge" id="e${i}" d="M${x1 + 62} ${y1} C${(x1 + x2) / 2 + 30} ${y1} ${(x1 + x2) / 2 + 30} ${y2} ${x2 - 62} ${y2}"/>`; });
+  E.forEach(([, b], i) => { const c = COLOR[N[b][3]]; const dur = N[b][3] === 'down' ? 0 : 2 + (i * 7 % 10) / 4;
+    if (dur) h += `<circle class="pulse" r="3" fill="${c}" style="color:${c}"><animateMotion dur="${dur}s" begin="${(i * 3 % 10) / 5}s" repeatCount="indefinite"><mpath href="#e${i}"/></animateMotion></circle>`; });
+  for (const [x, y, l, s] of Object.values(N)) h += `<g class="node"><rect x="${x - 62}" y="${y - 17}" width="124" height="34" rx="10"/><circle cx="${x - 46}" cy="${y}" r="4.5" fill="${COLOR[s]}"/><text x="${x - 35}" y="${y + 4}">${esc(l)}</text></g>`;
+  $('map').innerHTML = h;
+}
+
+function renderIncidents() {
+  const list = cur.incidents || [];
+  $('incidents').innerHTML = !list.length ? '<p class="none">No incidents in the last 14 days.</p>' : list.map(i => `<div class="inc"><b>${esc(i.title)}</b><span class="tag ${i.resolved_at ? 'resolved' : 'open'}">${esc(i.state)}</span>${i.resolved_at ? `<span class="mono" style="color:var(--dim);font-size:12px;margin-left:8px">${fmtT(i.started_at)}</span>` : ''}<div class="tl">${(i.updates || []).map(u => `<div><em>${fmtT(u.at)}</em> — ${esc(u.text)}</div>`).join('')}</div></div>`).join('');
+}
+
+$('refresh').onclick = () => { const s = $('scan'); s.classList.remove('go'); void s.offsetWidth; s.classList.add('go'); load(); };
+load(); setInterval(load, 60000); setInterval(tick, 5000);
+</script></body></html>
