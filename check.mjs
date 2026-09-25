@@ -99,4 +99,6 @@ if (overall === 'down') lastOutage = runAt.toISOString();
 fs.mkdirSync(DIR, { recursive: true });
 fs.writeFileSync(`${DIR}/current.json`, JSON.stringify({ checked_at: runAt.toISOString(), overall, services, incidents, last_outage: lastOutage }, null, 1));
 fs.writeFileSync(`${DIR}/history.json`, JSON.stringify(hist));
-console.log(`${overall} · ${services.filter(s => s.state === 'ok').length}/${services.length} ok · ${results.filter(r => !r.ok).map(r => r.key).join(', ') || 'no failures'}`);
+// Only a count: this repo is public, so its Actions logs are too, and a key
+// names an internal endpoint. Which ones failed is in Admin › Status.
+console.log(`${overall} · ${services.filter(s => s.state === 'ok').length}/${services.length} ok · ${results.filter(r => !r.ok).length} failed check(s)`);

@@ -99,7 +99,11 @@ footer{margin-top:36px;color:var(--dim);font-size:12px;text-align:center}
 </div>
 <div id="tip"></div>
 <script>
-const DATA = new URLSearchParams(location.search).get('data') || 'https://raw.githubusercontent.com/amandeepman101/restowise-status/data/';
+// ?data= is honoured on localhost only (pointing at a local copy while
+// developing). In production it would let anyone share a status.restowise.app
+// link that renders outages of their own invention.
+const LOCAL = ['localhost', '127.0.0.1'].includes(location.hostname);
+const DATA = (LOCAL && new URLSearchParams(location.search).get('data')) || 'https://raw.githubusercontent.com/amandeepman101/restowise-status/data/';
 const $ = id => document.getElementById(id);
 const COLOR = { ok: '#34d399', slow: '#fbbf24', down: '#f87171', none: '#8b87b3' };
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
