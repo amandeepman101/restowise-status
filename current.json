@@ -1,18 +1,18 @@
 {
- "checked_at": "2026-10-02T14:56:17.892Z",
+ "checked_at": "2026-10-02T19:45:34.959Z",
  "overall": "ok",
  "services": [
   {
    "name": "Hub",
    "section": "Apps",
    "state": "ok",
-   "ms": 258
+   "ms": 382
   },
   {
    "name": "Scheduler",
    "section": "Apps",
    "state": "ok",
-   "ms": 393
+   "ms": 288
   },
   {
    "name": "Payroll",
@@ -24,31 +24,31 @@
    "name": "Breaks",
    "section": "Apps",
    "state": "ok",
-   "ms": 360
+   "ms": 481
   },
   {
    "name": "Checklist",
    "section": "Apps",
    "state": "ok",
-   "ms": 454
+   "ms": 393
   },
   {
    "name": "Dough Prep",
    "section": "Apps",
    "state": "ok",
-   "ms": 463
+   "ms": 415
   },
   {
    "name": "HACCP",
    "section": "Apps",
    "state": "ok",
-   "ms": 462
+   "ms": 426
   },
   {
    "name": "Inventory",
    "section": "Apps",
    "state": "ok",
-   "ms": 541
+   "ms": 453
   },
   {
    "name": "Insights",
@@ -60,61 +60,61 @@
    "name": "Marketing",
    "section": "Apps",
    "state": "ok",
-   "ms": 410
+   "ms": 439
   },
   {
    "name": "Hiring",
    "section": "Apps",
    "state": "ok",
-   "ms": 440
+   "ms": 417
   },
   {
    "name": "Admin",
    "section": "Apps",
    "state": "ok",
-   "ms": 490
+   "ms": 523
   },
   {
    "name": "Help center",
    "section": "Apps",
    "state": "ok",
-   "ms": 557
+   "ms": 544
   },
   {
    "name": "Website",
    "section": "Apps",
    "state": "ok",
-   "ms": 496
+   "ms": 626
   },
   {
    "name": "Sign-in",
    "section": "Behind the scenes",
    "state": "ok",
-   "ms": 964
+   "ms": 802
   },
   {
    "name": "Mobile app sync",
    "section": "Behind the scenes",
    "state": "ok",
-   "ms": 2807
+   "ms": 2712
   },
   {
    "name": "Review, job & deals forms",
    "section": "Behind the scenes",
    "state": "ok",
-   "ms": 1069
+   "ms": 1041
   },
   {
    "name": "Notifications",
    "section": "Behind the scenes",
    "state": "ok",
-   "ms": 806
+   "ms": 797
   },
   {
    "name": "Email",
    "section": "Behind the scenes",
    "state": "ok",
-   "ms": 740
+   "ms": 691
   }
  ],
  "incidents": [],
