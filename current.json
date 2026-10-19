@@ -1,120 +1,120 @@
 {
- "checked_at": "2026-10-19T14:04:20.216Z",
- "overall": "ok",
+ "checked_at": "2026-10-19T19:49:27.089Z",
+ "overall": "slow",
  "services": [
   {
    "name": "Hub",
    "section": "Apps",
    "state": "ok",
-   "ms": 624
+   "ms": 271
   },
   {
    "name": "Scheduler",
    "section": "Apps",
    "state": "ok",
-   "ms": 469
+   "ms": 262
   },
   {
    "name": "Payroll",
    "section": "Apps",
    "state": "ok",
-   "ms": 269
+   "ms": 282
   },
   {
    "name": "Breaks",
    "section": "Apps",
    "state": "ok",
-   "ms": 269
+   "ms": 295
   },
   {
    "name": "Checklist",
    "section": "Apps",
    "state": "ok",
-   "ms": 519
+   "ms": 369
   },
   {
    "name": "Dough Prep",
    "section": "Apps",
    "state": "ok",
-   "ms": 488
+   "ms": 436
   },
   {
    "name": "HACCP",
    "section": "Apps",
    "state": "ok",
-   "ms": 487
+   "ms": 383
   },
   {
    "name": "Inventory",
    "section": "Apps",
    "state": "ok",
-   "ms": 584
+   "ms": 577
   },
   {
    "name": "Insights",
    "section": "Apps",
    "state": "ok",
-   "ms": 727
+   "ms": 632
   },
   {
    "name": "Marketing",
    "section": "Apps",
    "state": "ok",
-   "ms": 634
+   "ms": 568
   },
   {
    "name": "Hiring",
    "section": "Apps",
    "state": "ok",
-   "ms": 646
+   "ms": 544
   },
   {
    "name": "Admin",
    "section": "Apps",
    "state": "ok",
-   "ms": 554
+   "ms": 614
   },
   {
    "name": "Help center",
    "section": "Apps",
    "state": "ok",
-   "ms": 557
+   "ms": 514
   },
   {
    "name": "Website",
    "section": "Apps",
    "state": "ok",
-   "ms": 645
+   "ms": 579
   },
   {
    "name": "Sign-in",
    "section": "Behind the scenes",
    "state": "ok",
-   "ms": 886
+   "ms": 905
   },
   {
    "name": "Mobile app sync",
    "section": "Behind the scenes",
-   "state": "ok",
-   "ms": 2904
+   "state": "slow",
+   "ms": 3082
   },
   {
    "name": "Review, job & deals forms",
    "section": "Behind the scenes",
    "state": "ok",
-   "ms": 1091
+   "ms": 1116
   },
   {
    "name": "Notifications",
    "section": "Behind the scenes",
    "state": "ok",
-   "ms": 911
+   "ms": 898
   },
   {
    "name": "Email",
    "section": "Behind the scenes",
    "state": "ok",
-   "ms": 805
+   "ms": 839
   }
  ],
  "incidents": [],
